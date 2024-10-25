@@ -6,14 +6,25 @@ document.addEventListener("DOMContentLoaded", ()=>{
         {id:4, name:"Watch", price:10000},
     ];
 
-    const cart = [];
+    let cart = [];
 
     const productList = document.getElementById("product-list");
     const cartItems = document.getElementById("cart-items");
-    const emptyCartMsg = document.getElementById("empty-cart");
     const cartTotal = document.getElementById("cart-total");
     const totalPriceDisplay = document.getElementById("total-price");
     const checkoutBtn = document.getElementById("checkout-btn");
+
+    function loadCartFromLocalStorage() {
+        const savedCart = localStorage.getItem("cart");
+        if (savedCart) {
+            cart = JSON.parse(savedCart);
+            renderCart();
+        }
+    }
+
+    function saveCartToLocalStorage() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
 
     products.forEach((product) => {
         const productDiv = document.createElement("div");
@@ -35,6 +46,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     function addToCart(product){
         cart.push(product);
+        saveCartToLocalStorage();
         renderCart();
     }
 
@@ -43,29 +55,43 @@ document.addEventListener("DOMContentLoaded", ()=>{
         let totalPrice = 0;
 
         if(cart.length>0){
-            emptyCartMsg.classList.add("hidden");
             cartTotal.classList.remove("hidden");
             cart.forEach((item) => {
                 totalPrice += item.price;
                 const itemDiv = document.createElement("div");
+                itemDiv.classList.add("item");
                 itemDiv.innerHTML = `
-                    ${item.name} - ₹${item.price}
-                `
+                    <span>${item.name} - ₹${item.price} </span>
+                    <button data-id="${item.id}"> Remove Item </button>
+                `;
                 cartItems.appendChild(itemDiv);
                 totalPriceDisplay.textContent = `${totalPrice}`;
             })
         }
         else{
             totalPriceDisplay.textContent = `0.00`;
-            emptyCartMsg.classList.remove("hidden");
-            // cartTotal.classList.add("hidden");
+            const emptyDiv = document.createElement("p");
+            emptyDiv.innerHTML = `Your cart is empty`
+            emptyDiv.classList.add("empty-cart")
+            cartItems.appendChild(emptyDiv);    
 
         }
     }
+
+    cartItems.addEventListener('click', (event)=>{
+        if(event.target.tagName === 'BUTTON'){
+            const itemId = parseInt(event.target.getAttribute("data-id"));
+            cart = cart.filter(cartItem => cartItem.id !== itemId);
+            saveCartToLocalStorage();
+            renderCart();
+        }
+    })
 
     checkoutBtn.addEventListener('click', ()=>{
         cart.length = 0;
         alert("Check out Successfully")
         renderCart();
     })
+
+    loadCartFromLocalStorage();
 });
