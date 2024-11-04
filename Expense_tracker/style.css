@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+ 
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+ 
+.container h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+ 
+#expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+ 
+#expense-form input[type="text"],
+#expense-form input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+ 
+#expense-form input[type="text"]:focus,
+#expense-form input[type="number"]:focus {
+    border-color: #007bff;
+}
+ 
+#expense-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+ 
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#expense-form button:hover {
+    background-color: #0056b3;
+}
+ 
+button:hover {
+    background-color: #0056b3;
+}
+
+.container h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 5px;
+}
+ 
+#expense-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+#expense-list li {
+    background-color: #f9f9f9;
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+ 
+#total {
+    margin-top: 25px;
+    font-size: 1.2em;
+}
+ 
+#total h3 {
+    color: #333;
+    font-weight: bold;
+}
+ 
+#total span {
+    color: #007bff;
+}
