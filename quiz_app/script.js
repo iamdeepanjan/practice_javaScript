@@ -30,6 +30,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let score = 0;
 
     startBtn.addEventListener('click', startQuiz);
+    nextBtn.addEventListener('click', ()=>{
+        questionIndex++;
+        if(questionIndex<questions.length){
+            showQuestion();
+        }
+        else{
+            showResult();
+        }    
+    });
+    restartBtn.addEventListener('click', () => {
+        questionIndex = 0;
+        score = 0;
+        startQuiz();
+    });
 
     function startQuiz(){
         startBtn.classList.add("hidden");
@@ -38,5 +52,39 @@ document.addEventListener('DOMContentLoaded', ()=>{
         showQuestion();
     }
 
-    
+    function showQuestion(){
+        nextBtn.classList.add("hidden");
+        questionText.textContent = questions[questionIndex].question;
+        choiceList.innerHTML = "";
+        questions[questionIndex].choices.forEach(choice => {
+            const li = document.createElement('li');
+            li.textContent = choice;
+            li.addEventListener('click', () => checkAnswer(choice));
+            choiceList.appendChild(li);
+        })
+    }
+
+    function checkAnswer(choice){
+        const correctAnswer = questions[questionIndex].answer;
+        if(choice === correctAnswer){
+            score++;
+        }
+        disabledList();
+        nextBtn.classList.remove("hidden");
+    }
+
+    function disabledList(){
+        const allChoices = document.querySelectorAll("#choice-list li");
+        allChoices.forEach((li) => {
+            li.classList.add('disabled');
+            li.style.pointerEvents = "none";
+        });
+    }
+
+    function showResult(){
+        resultContainer.classList.remove("hidden");
+        questionContainer.classList.add("hidden");
+        scoreDisplay.textContent = `${score} out of ${questions.length}`;
+    }
+
 })

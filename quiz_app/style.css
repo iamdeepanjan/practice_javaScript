@@ -55,6 +55,26 @@ h1 {
 #choice-list li:hover {
     background-color: #dee2e6;
 }
+
+/* #choice-list li:active{
+    background-color: #a1c6eb;
+}
+
+#choice-list li:focus{
+    background-color: #a1c6eb;
+} */
+
+.clicked{
+    background-color: #a1c6eb;
+}
+
+.hidden {
+    display: none;
+}
+
+.disabled{
+    opacity: 0.6;
+}
  
 /* Buttons */
 button {
